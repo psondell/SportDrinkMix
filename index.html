@@ -61,13 +61,20 @@
   <label for="carbs">Total carbs (g):</label>
   <input type="number" id="carbs" placeholder="e.g. 100">
 
-
+  <!--
   <label for="ratio">Choose glucose : fructose ratio</label>
   <select id="ratio">
     <option value="0.8">1 : 0.8 (standard)</option>
     <option value="0.5">1 : 0.5 (2 : 1)</option>
   </select>
-
+  -->
+  
+  <label for="ratio">Choose glucose : fructose ratio</label>
+  <select id="ratio">
+    <option value="0.333">3 : 1 (60–80 g/h | 90–120 min)</option>
+    <option value="0.5">2 : 1 (80–100 g/h | 2–3h)</option>
+    <option value="0.8">1 : 0.8 (>100 g/h | >3h)</option>
+  </select>
 
   <button id="calc">Calculate Mix</button>
 

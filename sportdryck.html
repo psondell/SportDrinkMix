@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sportdryck Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 480px;
+      margin: auto;
+      background: #fafafa;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    label, input, select, button {
+      display: block;
+      width: 100%;
+      font-size: 1em;
+      margin-bottom: 0.5em;
+    }
+    input, select {
+      padding: 0.5em;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 0.7em;
+      background: #007acc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    button:active { background: #005fa3; }
+    #result {
+      white-space: pre-line;
+      margin-top: 1em;
+      padding: 1em;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    footer {
+      margin-top: 2em;
+      font-size: 0.8em;
+      text-align: center;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+
+  <h1>Sportdryck Calculator</h1>
+
+
+  <label for="carbs">Total carbs (g):</label>
+  <input type="number" id="carbs" placeholder="e.g. 100">
+
+
+  <label for="ratio">Choose glucose : fructose ratio</label>
+  <select id="ratio">
+    <option value="0.8">1 : 0.8 (standard)</option>
+    <option value="0.5">1 : 0.5 (2 : 1)</option>
+  </select>
+
+
+  <button id="calc">Calculate Mix</button>
+
+
+  <div id="result"></div>
+
+
+  <footer>
+    Save this file on your phone and open in your browser.<br>
+    Works entirely offline.
+  </footer>
+
+
+  <script>
+    function calculate() {
+      var C = parseFloat(document.getElementById("carbs").value);
+      var R = parseFloat(document.getElementById("ratio").value);
+      if (!C || C <= 0) {
+        document.getElementById("result").innerText = 
+          "Please enter a positive number for total carbs.";
+        return;
+      }
+      // Sucrose grams = 2*R*C/(1+R)
+      var S = 2 * R * C / (1 + R);
+      var M = C - S;                   // Maltodextrin grams
+      var glucose  = M + S/2;          // Total glucose
+      var fructose = S / 2;            // Total fructose
+
+
+      document.getElementById("result").innerText =
+        "Ratio: 1 :" + R + "\n\n" +
+        "Sucrose (table sugar): " + S.toFixed(2) + " g\n" +
+        "Maltodextrin:             " + M.toFixed(2) + " g\n\n" +
+        "▶ Glucose total:   " + glucose.toFixed(2) + " g\n" +
+        "▶ Fructose total:  " + fructose.toFixed(2) + " g";
+    }
+
+
+    document.getElementById("calc")
+            .addEventListener("click", calculate);
+  </script>
+
+
+</body>
+</html>
